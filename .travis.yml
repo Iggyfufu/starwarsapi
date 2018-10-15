@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - node
+cache:
+  directories:
+  - node_modules
+dist: trusty
+sudo: false
+install: 
+  - npm ci
+before_deploy:
+  - npm run build
+  - rm -rf node_modules
+deploy:
+  skip_cleanup: true 
+  provider: heroku
+  app: swapi-strikes-back
+  api_key:
+    secure: a4b2OmZpS5biW+i2WJdXqSZFfGfXHr1haEB7XaeOi12AeaM/c7115g+iA3jmogI1Jfq3PaGUpVB/LwLJ5dUWHfzhJZqG2hBlRDY3bwucueEWL2sCsJjeWFISqK73BazeeH/v7a+0hpFqBOiNreUmIUpI4w+Vxim8U2YnXL9jTL0VO54GupcUHM5Ut/dhoa013kQB/pmTs8PNUDwWejL0MEis08ZRP+p0CuTyVPRNl8jW0dahHdQ+oZi4YWyUoqbIBGrAizrHaKpy6xYgs8eY7ftuq4+d5DrVxrv6mmOQ53KB+/qWDgqF0XmyKYdrJAsRVnKPSPzZLjRChPfVeoNSggFk3cFXiHb+jteocg7m1PpZVgyifIR8E/hw0UaxM9FmngIt7Hjpsespjnu8dYs40e2Npz5ZZ2/p7oqPKtqjO4RRt0LO9MTN0D83B+rcgkHKxI3V4YIGpfNvMdrGEHwyBCoIXoZKRbHpK+IUC8nSl/Qr0rvMR53Y3pLy6NQ1Cs7MzMoypeP09hJ6ibXoaX+N/V1VkzYhuK5Wv292YhSbaeCfl+aBRilclJJRF8MLMJx9Ysi7WF19KrGHV1fQShpbK0zQziH4q6X93Un8ujj7EhfkwQUxm95LdHl6rWth1Dv4DwLQ/XYlBwQRm7CgPhvXj73BEz3A3bb/i2kLkSeJ2aM=
