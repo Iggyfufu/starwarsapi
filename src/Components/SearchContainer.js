@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
+
 import { characters } from '../data/character';
 import Selector from './Selector';
+import MovieList from './MoviesList';
 
 class SearchContainer extends Component {
   constructor() {
     super();
     this.state = {
       characters,
-      selected: ''
+      url: ''
     }
   }
 
   onSelect = (name) => {
     const { characters } = this.state
     const selected = characters.filter(element => element.name === name)
-    console.log(selected, name);
-    
-    // this.setState({selected: selected[0].url})
+    if(selected.length) this.setState({url: selected[0].url})
   }
 
   render() {
-    console.log(this.state.selected)
     return (
       <div className='container'>
         <Selector characters={characters} onSelect={this.onSelect} />
+        <MovieList url={this.state.url} />
       </div>
     )
   }

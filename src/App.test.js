@@ -7,6 +7,7 @@ import App from './App';
 import data from './data/character';
 import SearchContainer from './Components/SearchContainer'
 import Selector from './Components/Selector'
+import MovieList from './Components/MoviesList'
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -98,4 +99,27 @@ describe('Selector Component', () => {
     })
     expect(wrapper.find('select').props().value).toBe('Luke Skywalker')
   })
+})
+
+//Test MovieList Component
+describe('Movie List Component', () => {
+  it('renders', () => {
+    const wrapper = shallow(<MovieList /> );
+
+    expect(wrapper.exists()).toBe(true);
+  })
+
+  it('should fetch the data when url changes', async() => {
+    try {
+      const wrapper = shallow(<MovieList url="" />, { lifecycleExperimental: true });
+      const prevState = wrapper.state()
+      wrapper.setProps({ url: "https://swapi.co/api/people/1/" });
+      await wrapper.instance().componentDidUpdate(null, prevState)
+      await wrapper.update()
+      expect(wrapper.state().movies.length).toBe(5)
+    } catch(error) {
+      console.error(error);
+    }
+  })
+
 })
