@@ -6,6 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import App from './App';
 import data from './data/character';
 import SearchContainer from './Components/SearchContainer'
+import Selector from './Components/Selector'
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -35,7 +36,7 @@ it('Test for Character JSON file', () => {
       "name": "R2-D2",
       "url": "https://swapi.co/api/people/3/"
     }
-  ]
+  ];
 
   expect(data).toBeDefined();
   expect(data.characters).toEqual(expect.arrayContaining(chars));
@@ -67,9 +68,30 @@ describe('Search Container', () => {
         "name": "R2-D2",
         "url": "https://swapi.co/api/people/3/"
       }
-    ]
+    ];
     const wrapper = shallow(<SearchContainer />);
     expect(wrapper.state().characters).toBeDefined();
-    expect(wrapper.state().characters).toEqual(expect.arrayContaining(chars))
+    expect(wrapper.state().characters).toEqual(expect.arrayContaining(chars));
+  })
+})
+
+//Test Selector Component
+describe('Selector Component', () => {
+  it('renders', () => {
+    const wrapper = shallow(<Selector />);
+
+    expect(wrapper.exists()).toBe(true);
+  })
+
+  it('user selection is echoed', () => {
+    const wrapper = shallow(<Selector characters={[]}/>);
+
+    wrapper.find('dropdown').simulate('change', {
+      target: {
+        value: 'Luke Skywalker'
+      }
+    })
+
+    expect(wrapper.find('dropdown').props().value).toBe('Luke Skywalker')
   })
 })
