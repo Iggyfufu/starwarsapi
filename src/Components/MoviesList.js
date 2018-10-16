@@ -7,13 +7,13 @@ class MovieList extends Component {
     this.state = {
       url: this.props.url,
       movies: [],
-      error: false
+      loading: false
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if(nextProps.url !== prevState.url) {
-      return { url: nextProps.url }
+      return { url: nextProps.url, loading: true }
     } else {
       return null
     }
@@ -22,11 +22,11 @@ class MovieList extends Component {
   async componentDidUpdate(prevProps, prevState) {
     try {
       if(prevState.url !== this.state.url) {
-        const { url, resetError } = this.props
+        const { url } = this.props
         const moviesLinks = await axios.get(url).then(response => response.data.films)
         const dataObjs = await Promise.all(moviesLinks.map(link => axios.get(link)))
         const movies = dataObjs.map(data => data.data)
-        this.setState({movies: movies, error: false})
+        this.setState({movies: movies, loading: false})
       }
     } catch(error) {
       this.setState({error: true})
@@ -37,6 +37,9 @@ class MovieList extends Component {
   render() {    
     const { movies } = this.state    
     if(this.state.error) throw new Error('Something went wrong.')
+    if(this.state.loading) {
+      return 'String'
+    }
     return (
       <div>
         {
