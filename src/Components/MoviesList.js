@@ -35,16 +35,26 @@ class MovieList extends Component {
 
 
   render() {    
-    const { movies } = this.state    
+    const { movies } = this.state  
+    console.log(movies);
+      
     if(this.state.error) throw new Error('Something went wrong.')
     if(this.state.loading) {
-      return 'String'
+      return (
+        <div className="css-loader">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      )
     }
     return (
       <div>
         {
           movies.map(movie => {
-            return <div key={movie.title}>{ movie.title}</div>
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+            const formatedDate = new Date(movie.release_date).toLocaleDateString('eng', options)
+            return <div key={movie.title}>{movie.title}{formatedDate}</div>
           })
         }
       </div>
