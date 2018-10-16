@@ -7,7 +7,9 @@ class MovieList extends Component {
     this.state = {
       url: this.props.url,
       movies: [],
-      loading: false
+      loading: false,
+      error: false,
+      errorMessage: ''
     }
   }
 
@@ -29,16 +31,14 @@ class MovieList extends Component {
         this.setState({movies: movies, loading: false})
       }
     } catch(error) {
-      this.setState({error: true})
+      this.setState({error: true, errorMessage: error.toString()})
     }
   }
 
 
   render() {    
-    const { movies } = this.state  
-    console.log(movies);
-      
-    if(this.state.error) throw new Error('Something went wrong.')
+    const { movies } = this.state
+    if(this.state.error) throw new Error(this.state.errorMessage.toString())
     if(this.state.loading) {
       return (
         <div className="css-loader">
@@ -49,12 +49,21 @@ class MovieList extends Component {
       )
     }
     return (
-      <div>
+      <div className="movies">
         {
           movies.map(movie => {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
             const formatedDate = new Date(movie.release_date).toLocaleDateString('eng', options)
-            return <div key={movie.title}>{movie.title}{formatedDate}</div>
+            return (
+              <div key={movie.title} className="movie">
+                <strong className="movies-title">
+                  {movie.title}
+                </strong>
+                <div className="movies-date">
+                  <span>Released:  </span>{formatedDate}
+                </div>
+              </div>
+            )
           })
         }
       </div>

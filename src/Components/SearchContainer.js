@@ -24,6 +24,7 @@ class SearchContainer extends Component {
     return (
       <div className='container'>
         <ErrorBoundary>
+          <h1 className="header">What movie are they in?</h1>
           <Selector characters={characters} onSelect={this.onSelect} />
           <MovieList url={this.state.url} />
         </ErrorBoundary>

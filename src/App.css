@@ -1,36 +1,107 @@
 .App {
   text-align: center;
+  height: 100vh;
 }
 
+footer {
+  background: white;
+  bottom: 0;
+  position: absolute;
+  width: 100vw;
+  height: 3rem;
+}
 
+.image {
+  background-image: url('./img/swimg.jpg');
+  background-size: cover;
+  z-index: -1000000;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+}
 
+.container {
+  padding-top: 5rem;
+  height: 50rem;
+}
 
+.dropdown {
+  font-size: 1rem;
+  margin: 3em 2em;
+  width: 350px;
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid black
+}
+
+.header {
+  color: white;
+  font-size: 3rem;
+}
+
+.movie {
+  margin-bottom: 0.5rem;
+}
+
+.movies {
+  margin-top: 2.5rem;
+}
+.movies-title {
+  font-size: 2rem;
+  color: white;
+}
+
+.movies-date {
+  font-size: 1rem;
+  color: white;
+}
+
+.error-header {
+  color: white
+}
+
+.reset-button {
+  margin-top: 2rem;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.reset-button:hover {
+  background-color: beige;
+  box-shadow: 9px 9px 15px black;
+}
 
 /* Loader */
 .css-loader {
-  display: inline-block;
+  display: flex;
   position: relative;
-  width: 64px;
-  height: 64px;
+  margin-top: 3rem;
+  height: 3rem;
+  justify-content: center;
 }
 .css-loader div {
-  display: inline-block;
   position: absolute;
-  left: 6px;
-  width: 13px;
-  background: #fcf;
+  width: 0.9rem;
+  background: white;
   animation: css-loader 1.0s cubic-bezier(0, 0.6, 0.6, 1) infinite;
 }
 .css-loader div:nth-child(1) {
-  left: 6px;
+  left: calc(50% - 2rem);
+  transform: translate(-50%, -50%);
   animation-delay: -0.24s;
 }
 .css-loader div:nth-child(2) {
-  left: 26px;
+  left: calc(50%);
+  transform: translate(-50%, -50%);
   animation-delay: -0.12s;
 }
 .css-loader div:nth-child(3) {
-  left: 45px;
+  left: calc(50% + 2rem);
+  transform: translate(-50%, -50%);
   animation-delay: 0;
 }
 @keyframes css-loader {

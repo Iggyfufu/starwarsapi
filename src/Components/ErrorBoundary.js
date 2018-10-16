@@ -24,16 +24,14 @@ class ErrorBoundary extends Component {
   }
 
   render() {
+    
     if(this.state.errorInfo) {
       return (
         <div>
-          <h2>Something went wrong</h2>
-          <details>
-            {this.state.error && this.state.error.toString()}
-            <br/>
-            {this.state.errorInfo.componentStack}
-          </details>
-          <button onClick={this.resetError}>Select another character</button>
+          <h2 className="error-header">Oops!</h2>
+          <h3 className="error-header"> We can't seem to find the movies for the character you've selected.</h3>
+          <details className="error-header">{this.state.error.toString()}</details>
+          <button className="reset-button" onClick={this.resetError}>Select another character</button>
         </div>
       )
     }

@@ -16,20 +16,22 @@ class Selector extends Component {
 
   render() {
     const { characters } = this.props
-    
+
     return (
-      <select className='dropdown' onChange={this.handleChange} value={this.state.selected}>
-        <option value='Select your character'>Select a character</option>
-        {
-          characters.map(character => {
-            return (
-              <option key={character.name} value={character.name}>
-                {character.name}
-              </option>
-            )
-          })
-        }
-      </select>
+      <div className="dropdown-container">
+        <select className='dropdown' onChange={this.handleChange} value={this.state.selected}>
+          <option value='Select your character'>Select a character</option>
+          {
+            characters.map(character => {
+              return (
+                <option key={character.name} value={character.name}>
+                  {character.name}
+                </option>
+              )
+            })
+          }
+        </select>
+      </div>
     )
   }
 }
