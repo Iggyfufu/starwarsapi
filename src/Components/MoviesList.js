@@ -6,7 +6,8 @@ class MovieList extends Component {
     super(props)
     this.state = {
       url: this.props.url,
-      movies: []
+      movies: [],
+      error: false
     }
   }
 
@@ -21,19 +22,21 @@ class MovieList extends Component {
   async componentDidUpdate(prevProps, prevState) {
     try {
       if(prevState.url !== this.state.url) {
-        const moviesLinks = await axios.get(this.props.url).then(response => response.data.films)
+        const { url, resetError } = this.props
+        const moviesLinks = await axios.get(url).then(response => response.data.films)
         const dataObjs = await Promise.all(moviesLinks.map(link => axios.get(link)))
         const movies = dataObjs.map(data => data.data)
-        this.setState({movies: movies})
+        this.setState({movies: movies, error: false})
       }
     } catch(error) {
-      throw new Error(error)
+      this.setState({error: true})
     }
   }
 
 
   render() {    
-    const { movies } = this.state
+    const { movies } = this.state    
+    if(this.state.error) throw new Error('Something went wrong.')
     return (
       <div>
         {

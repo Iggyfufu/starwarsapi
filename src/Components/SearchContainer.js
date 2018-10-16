@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { characters } from '../data/character';
 import Selector from './Selector';
 import MovieList from './MoviesList';
+import ErrorBoundary from './ErrorBoundary';
 
 class SearchContainer extends Component {
   constructor() {
@@ -22,8 +23,10 @@ class SearchContainer extends Component {
   render() {
     return (
       <div className='container'>
-        <Selector characters={characters} onSelect={this.onSelect} />
-        <MovieList url={this.state.url} />
+        <ErrorBoundary>
+          <Selector characters={characters} onSelect={this.onSelect} />
+          <MovieList url={this.state.url} />
+        </ErrorBoundary>
       </div>
     )
   }
