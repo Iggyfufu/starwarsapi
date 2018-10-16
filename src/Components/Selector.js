@@ -11,7 +11,7 @@ class Selector extends Component {
   handleChange = (evt) => {
     const { onSelect } = this.props
     this.setState({ selected: evt.target.value })
-    onSelect(evt.target.name)
+    onSelect(evt.target.value)
   }
 
   render() {
