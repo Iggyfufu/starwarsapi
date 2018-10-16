@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { shallow, mount, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import App from './App';
@@ -78,20 +78,24 @@ describe('Search Container', () => {
 //Test Selector Component
 describe('Selector Component', () => {
   it('renders', () => {
-    const wrapper = shallow(<Selector />);
+    const wrapper = shallow(<Selector characters={[{ name: 'Luke Skywalker' }]} />);
 
     expect(wrapper.exists()).toBe(true);
   })
 
-  it('user selection is echoed', () => {
-    const wrapper = shallow(<Selector characters={[]}/>);
+  it('selection is passed in', () => {
+    const wrapper = mount(<Selector characters={[{ name: 'Luke Skywalker' }]} />);
+    expect(wrapper.find('select').props().children.length).toBe(2)
+  })
 
-    wrapper.find('dropdown').simulate('change', {
+  it('user selection is echoed', () => {
+    const wrapper = mount(<Selector characters={[{name: 'Luke Skywalker'}]} onSelect={() => {}}/>);
+    
+    wrapper.find('select').simulate('change', {
       target: {
         value: 'Luke Skywalker'
       }
     })
-
-    expect(wrapper.find('dropdown').props().value).toBe('Luke Skywalker')
+    expect(wrapper.find('select').props().value).toBe('Luke Skywalker')
   })
 })
