@@ -1,4 +1,4 @@
-const characters = {
+const data = {
   "characters": [
     {
       "name": "Luke Skywalker",
@@ -19,4 +19,4 @@ const characters = {
   ]
 }
 
-module.exports = characters
+module.exports = data
